@@ -37,7 +37,7 @@ public class TasksController {
         taskRepository.deleteById(id);
     }
 
-    @PostMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<?> doneTask(@PathVariable @Valid Long id) {
         return serviceTask.doneTask(id);
     }

@@ -18,7 +18,6 @@ public class Usuario {
     private String nome;
 
     @Column(unique = true)
-    @Email(message = "Formato de email invalido")
     private String email;
 
     private String senha;

@@ -32,17 +32,17 @@ public class ServiceUsuario {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public String salvarUsuario(UsuarioRegisterDTO data) {
+    public ResponseEntity<?> salvarUsuario(UsuarioRegisterDTO data) {
         try {
             if (data.nome() != null && data.email() != null && data.senha() != null) {
                 Usuario usuario = new Usuario(data);
                 usuarioRepository.save(usuario);
-                return "Usuario cadastrado com sucesso";
+                return ResponseEntity.ok("Usuario cadastrado com sucesso");
             }
-            return "Verifique todos os campos";
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Verifique todos os campos");
         }
         catch (Exception e) {
-            return "Erro ao criar o cadastro";
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao criar o cadastro");
         }
 
     }

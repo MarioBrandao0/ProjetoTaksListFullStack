@@ -1,9 +1,7 @@
 package com.projetoTask.backend.domains;
 
 import com.projetoTask.backend.dtos.TaskDTO;
-import com.projetoTask.backend.repository.UsuarioRepository;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,7 +14,6 @@ public class Tasks {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "Coloque um nome na task")
     private String nomeTask;
     private String descricao;
     private boolean status = false;

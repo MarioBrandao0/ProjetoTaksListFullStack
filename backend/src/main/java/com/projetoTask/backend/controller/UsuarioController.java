@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,7 +22,10 @@ public class UsuarioController {
     JwtUtil jwtUtil;
 
     @PostMapping("/register")
-    public String registerUser(@RequestBody @Valid UsuarioRegisterDTO data) {
+    public ResponseEntity<?> registerUser(@RequestBody @Valid UsuarioRegisterDTO data, BindingResult result) {
+        if(result.hasErrors()) {
+            return ResponseEntity.badRequest().body(result.getAllErrors().get(0).getDefaultMessage());
+        }
         return serviceUsuario.salvarUsuario(data);
     }
 
