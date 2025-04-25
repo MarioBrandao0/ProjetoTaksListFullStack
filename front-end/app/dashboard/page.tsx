@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import "./StyleDashboard.css"
 import { getToken, TokenDecorder } from "@/util/JwtDecoder";
-import { getHeadersTOKEN } from "@/config/fetchConfig";
+import { BASE_URL, getHeadersTOKEN } from "@/config/fetchConfig";
 
 
 export default function UsersTasks() {
@@ -12,7 +12,7 @@ export default function UsersTasks() {
 
     const fetchTasks = async() => {
         try {
-            const response = await fetch(`http://localhost:8080/tarefas/recuperarTasks`, {
+            const response = await fetch(`${BASE_URL}/tarefas/recuperarTasks`, {
                 method: "GET",
                 headers: getHeadersTOKEN()
             });
@@ -61,6 +61,18 @@ export default function UsersTasks() {
    }
 
 
+   const updateTask = async(idTaks: number) => {
+        const response = await fetch(`${BASE_URL}/tarefas/update/${idTaks}`, {
+            method: "PUT"
+        })
+        if(!response.ok) {
+            const data = await response.text()
+            await alert(data)
+        }
+        await fetchTasks()
+   }
+
+
 
    
     return (
@@ -85,6 +97,9 @@ export default function UsersTasks() {
                                         <span className="status">
                                             {task.status ? '✅ Concluída' : '🕓 Pendente'}
                                         </span>
+                                        <div className="button-concluir">
+                                            <button className="concluir-btn" onClick={() => updateTask(task.id)}>Concluir</button>
+                                        </div>
                                     </div>
                                 )}
 

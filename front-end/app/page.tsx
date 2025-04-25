@@ -1,6 +1,7 @@
 "use client";
+import { BASE_URL } from "@/config/fetchConfig";
 import "./styles/paginaTasks.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Home() {
   
@@ -13,17 +14,15 @@ export default function Home() {
     e.preventDefault();
     try {
       if(email != '' && senha != '') {
-        const response = (await fetch("http://localhost:8080/usuarios/login", {
+        const response = (await fetch(`${BASE_URL}/usuarios/login`, {
           method: "POST",
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({email, senha})
         }));
   
         const data = await response.json();
-        console.log(data)
         
         if(data.sucess) {
-          console.log("Logado com sucesso")
           sessionStorage.setItem("token", data.token)
           setErro(null)
           window.location.href = "dashboard"
@@ -44,7 +43,6 @@ export default function Home() {
 
     }
     catch (err) {
-      console.log(err)
       setErro("Erro ao conectar com o servidor")
     }
 };
@@ -62,6 +60,7 @@ export default function Home() {
       </div>
 
       <button type="submit">Entrar</button>
+      <button type="button" className="registrar" onClick={() => (window.location.href = "register")}>Registrar</button>
       { erro && <p style={{color: "red"}}>{erro}</p> }
 
     </form>

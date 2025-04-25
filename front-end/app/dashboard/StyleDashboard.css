@@ -154,6 +154,7 @@
 header {
     display: flex;
     justify-content: space-between;
+    justify-content: center; /* verificar copmmo que vai ficar com isso aqui */
     align-items: center;
     background: linear-gradient(135deg, #6a11cb, #2575fc);
     color: white;
@@ -161,7 +162,7 @@ header {
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     margin-bottom: 10px;
-  }
+}
 
 .conteiner {
     width: 100vh;
@@ -181,7 +182,25 @@ header {
     gap: 15px;
     
 }
-  
+
+.button-concluir {
+    display: flex;
+    justify-content: end;
+}
+
+.button-concluir button {
+    border: none;
+    border-radius: 10px;
+    padding: 6px 20px;
+    background-color: #00b894;
+    color: white;
+    transition: all 0.3s ease-in;
+    cursor: pointer;
+}
+
+.concluir-btn:hover {
+    background-color: #1e917a;
+}
 
 .sem-tarefas {
     text-align: center;

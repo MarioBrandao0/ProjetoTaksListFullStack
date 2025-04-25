@@ -18,11 +18,10 @@ export default function ButtonRegisterTask() {
     }
 
     const registrarTask = async() => {
-        const status = false
         const response = await fetch(`${BASE_URL}/tarefas/register`, {
             method: "POST",
             headers: getHeadersJsonANDToken(),
-            body: JSON.stringify({nomeTask, descricao, status})
+            body: JSON.stringify({nomeTask, descricao})
         })
         const data = await response.text()
         await alert(data)
