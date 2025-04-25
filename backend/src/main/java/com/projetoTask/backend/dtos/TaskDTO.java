@@ -1,4 +1,4 @@
 package com.projetoTask.backend.dtos;
 
-public record TaskDTO(String nomeTask, String descricao, boolean status) {
+public record TaskDTO(String nomeTask, String descricao) {
 }

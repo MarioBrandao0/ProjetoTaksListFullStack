@@ -2,6 +2,7 @@ package com.projetoTask.backend.domains;
 
 import com.projetoTask.backend.dtos.UsuarioRegisterDTO;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +18,7 @@ public class Usuario {
     private String nome;
 
     @Column(unique = true)
+    @Email(message = "Formato de email invalido")
     private String email;
 
     private String senha;
