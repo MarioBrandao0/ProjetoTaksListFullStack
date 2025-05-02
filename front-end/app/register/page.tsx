@@ -21,6 +21,7 @@ export default function resgiter() {
             const response = await fetch(`${BASE_URL}/usuarios/register`, {
                 method: "POST",
                 headers: getHeadersJson(),
+                credentials: "include",
                 body: JSON.stringify({nome, email, senha})
             })
 

@@ -1,37 +1,14 @@
 "use client";
 import { useEffect, useState } from "react"
-import "./StyleDashboard.css"
-import { getToken, TokenDecorder } from "@/util/JwtDecoder";
-import { BASE_URL, getHeadersTOKEN } from "@/config/fetchConfig";
+import { BASE_URL } from "@/config/fetchConfig";
+import { useRouter } from "next/navigation";
 
 
-export default function UsersTasks() {
-    const [tasks, setTasks] = useState<any[]>([]);
+
+export default function UsersTasks({tasks}: {tasks: any[] }) {
+    const router = useRouter()
     const [mostrar, setMostrar] = useState<number[]>([]);
     const [loading, setLoading] = useState(true);
-
-    const fetchTasks = async() => {
-        try {
-            const response = await fetch(`${BASE_URL}/tarefas/recuperarTasks`, {
-                method: "GET",
-                headers: getHeadersTOKEN()
-            });
-            const data = await response.json();
-            setTasks(data)
-            console.log(tasks)
-        }
-        catch (err) {
-
-        }
-        finally {
-            setLoading(false)
-        }
-    }
-
-
-   useEffect(() => {
-        fetchTasks();
-   }, [])
 
    function mostrarDetalhes(id: number) {
         if(mostrar.includes(id)) {
@@ -43,14 +20,21 @@ export default function UsersTasks() {
    }
 
 
+    useEffect(() => {
+        if(tasks) {
+            setLoading(false)
+        }
+    }, [])
+
    function excluirTask(taskName: String, idTaks: number) {
         const apagar = async() => {
             try {
                 const response = await fetch(`http://localhost:8080/tarefas/deletarTask/${idTaks}`, {
-                    method: "DELETE"
+                    method: "DELETE",
+                    credentials: "include"
                 })
                 alert(`Tarefa: ${taskName} excluida com sucesso`)
-                await fetchTasks();
+                await router.refresh()
             }
             catch (err) {
                 return "Houve um erro"
@@ -63,13 +47,14 @@ export default function UsersTasks() {
 
    const updateTask = async(idTaks: number) => {
         const response = await fetch(`${BASE_URL}/tarefas/update/${idTaks}`, {
-            method: "PUT"
+            method: "PUT",
+            credentials: "include"
         })
         if(!response.ok) {
             const data = await response.text()
             await alert(data)
         }
-        await fetchTasks()
+        await router.refresh()
    }
 
 
@@ -97,9 +82,15 @@ export default function UsersTasks() {
                                         <span className="status">
                                             {task.status ? '✅ Concluída' : '🕓 Pendente'}
                                         </span>
-                                        <div className="button-concluir">
-                                            <button className="concluir-btn" onClick={() => updateTask(task.id)}>Concluir</button>
-                                        </div>
+                                        {task.status ? (
+                                            <div className="button-desmarcar">
+                                                <button className="desmarcar-btn" onClick={() => updateTask(task.id)}>Desmarcar</button>
+                                            </div>
+                                        ) : (
+                                            <div className="button-concluir">
+                                                <button className="concluir-btn" onClick={() => updateTask(task.id)}>Concluir</button>
+                                            </div>
+                                        )}
                                     </div>
                                 )}
 

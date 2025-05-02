@@ -1,15 +1,20 @@
+"use server"
 import { jwtDecode } from "jwt-decode";
+import { cookies } from "next/headers";
 
 
-export function getToken(){
-    const token = sessionStorage.getItem("token");
-    return token
+export async function getToken(){
+    const cookieStorage = await cookies();
+    const token = cookieStorage.get("token")?.value;
+    return token;
 }
 
-export function TokenDecorder<T = any>(): T | null {
-    const token = getToken(); 
+export async function TokenDecorder<T = any>(): Promise<T | null> {
+    const token = await getToken();
     
-    if (!token) return null;
+    if(!token) return null;
 
-    return jwtDecode<T>(token);
+    const decode = jwtDecode<T>(token);
+
+    return decode || null;
 }

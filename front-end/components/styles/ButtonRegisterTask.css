@@ -91,7 +91,7 @@
     transition: border-color 0.3s ease;
 }
   
-.modal input:focus,
+.modal .nome-task:focus,
 .modal textarea:focus {
     border-color: #3498db;
     outline: none;

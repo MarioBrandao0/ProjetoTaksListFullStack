@@ -1,21 +1,18 @@
 import UsersTasksHead from "./usersTasksHead"
-import HeaderUsuario from "./HeaderUsuario"
-
+import HeaderUsuario from "./HeaderDashboard"
 
 export const generateMetadata = UsersTasksHead
 
-
+export const dynamic = 'force-dynamic';
 
 export default function DashBoardLayout({children}: {children: React.ReactNode}) {
     return (
-        <html lang="pt-br">
-            <body>
-                <header>
-                    <HeaderUsuario/>
-                </header>
-                {children}
-            </body>
-        </html>
+        <>
+            <header>
+                <HeaderUsuario/>
+            </header>
+            {children}
+        </>
     )
 
 }

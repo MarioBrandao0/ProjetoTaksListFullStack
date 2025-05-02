@@ -28,7 +28,7 @@ public class ServiceTask {
 
     public ResponseEntity<?> registerTask(TaskDTO data, HttpServletRequest request) {
         if(!data.nomeTask().isBlank() && !data.descricao().isBlank()) {
-            Usuario idUsuario = usuarioRepository.findById(jwtUtil.extractId(VerificadorHeader.verificarHeader(request))).orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
+            Usuario idUsuario = usuarioRepository.findById(jwtUtil.extractId(VerificadorHeader.getTokenFromCookie(request))).orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
             Tasks tasks = new Tasks(data, idUsuario);
             taskRepository.save(tasks);
             return ResponseEntity.ok("Tarefa Adicionada com Sucesso");
@@ -37,8 +37,10 @@ public class ServiceTask {
     }
 
     public ResponseEntity<?> findTasks(HttpServletRequest request) {
-        Long usuarioId = jwtUtil.extractId(VerificadorHeader.verificarHeader(request));
-        return ResponseEntity.ok(taskRepository.findByUsuarioId(usuarioId));
+        VerificadorHeader.getTokenFromCookie(request);
+        //Long usuarioId = jwtUtil.extractId(VerificadorHeader.getTokenFromCookie(request));
+        //return ResponseEntity.ok(taskRepository.findByUsuarioId(usuarioId));
+        return ResponseEntity.ok(taskRepository.findAll());
     }
 
     @Transactional
@@ -48,7 +50,7 @@ public class ServiceTask {
         if(task.isEmpty()) {
            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa não encontrada");
         }
-        taskRepository.updateStatus(id);
+        taskRepository.updateStatus(id, !task.get().isStatus());
 
         return ResponseEntity.ok("");
     }

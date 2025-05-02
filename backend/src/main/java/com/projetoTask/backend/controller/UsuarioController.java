@@ -1,7 +1,6 @@
 package com.projetoTask.backend.controller;
 
 import com.projetoTask.backend.dtos.LoginRequestDTO;
-import com.projetoTask.backend.dtos.LoginResponseDTO;
 import com.projetoTask.backend.dtos.UsuarioRegisterDTO;
 import com.projetoTask.backend.security.JwtUtil;
 import com.projetoTask.backend.services.ServiceUsuario;

@@ -198,6 +198,26 @@ header {
     cursor: pointer;
 }
 
+.button-desmarcar button{
+    border: none;
+    border-radius: 10px;
+    padding: 6px 20px;
+    background-color: #3498db;
+    color: white;
+    transition: all 0.3s ease-in;
+    cursor: ponter;
+}
+
+.button-desmarcar {
+    display: flex;
+    justify-content: end;
+}
+
+.desmarcar-btn:hover {
+    background-color: #2b80b9;
+}
+
+
 .concluir-btn:hover {
     background-color: #1e917a;
 }

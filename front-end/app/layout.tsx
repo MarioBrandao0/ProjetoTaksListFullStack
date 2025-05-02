@@ -1,13 +1,13 @@
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="pt-br">
-      <body>
-        {children}
-      </body>
-    </html>
-  );
+import "./global.css"
+export default function DashBoardLayout({children}: {children: React.ReactNode}) {
+    return (
+        <>
+            <html>
+                <body>
+                    {children} 
+                </body>
+            </html>
+        </>
+    )
+
 }

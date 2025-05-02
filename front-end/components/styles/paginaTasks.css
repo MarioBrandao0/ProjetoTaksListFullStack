@@ -1,23 +1,14 @@
-body {
-    background: linear-gradient(to right, #6a11cb, #2575fc);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    color: #fff;
-}
-
-
-form {
+.form-login {
     display: flex;
     flex-direction: column;
     background-color: rgba(0, 0, 0, 0.7);
     color: wheat;
     align-items: center;
     justify-content: center;
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     padding: 20px 30px;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -26,14 +17,14 @@ form {
 }
 
 
-input:focus, button:focus {
+.email:focus, .senha:focus, button:focus {
     outline: none;
     border-color: #3498db;
     box-shadow: 0 0 10px rgba(52, 152, 219, 0.7);
 }
 
 
-input {
+.email, .senha {
     background-color: #333;
     color: #fff;
     border: none;
@@ -49,7 +40,7 @@ input::placeholder {
 }
 
 /* Botão de login */
-button {
+.login {
     background-color: #3498db;
     color: white;
     border: none;
@@ -80,7 +71,7 @@ button {
     background-color: #c70303;
 }
 
-button:hover {
+.login:hover {
     background-color: #036fb8;
 }
 

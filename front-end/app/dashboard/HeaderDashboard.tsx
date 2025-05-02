@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import ButtonLogout from "../components/ButtonLogout";
-import { TokenDecorder } from "@/util/JwtDecoder";
-import ButtonRegisterTask from "../components/ButtonRegisterTask";
+import ButtonLogout from "../../components/ButtonLogout";
+
+import ButtonRegisterTask from "../../components/ButtonRegisterTask";
+import { getNomeUser } from "@/lib/functionLogin";
 
 
 export default function HeaderUsuario() {
@@ -10,11 +11,14 @@ export default function HeaderUsuario() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const nomeUser = TokenDecorder()
+        const buscarNome = async() => {
+            const nome = await getNomeUser()
+            setNome(nome)
+            setLoading(false)    
+        }
         
-        setNome(nomeUser.nomeUser)
-        setLoading(false)
-    })
+        buscarNome()
+    }, [])
 
     return (
         <>

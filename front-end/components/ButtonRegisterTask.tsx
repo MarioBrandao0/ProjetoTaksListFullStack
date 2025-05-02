@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import "./ButtonRegisterTask.css"
-import { BASE_URL, getHeadersJsonANDToken } from "@/config/fetchConfig";
+import "./styles/ButtonRegisterTask.css"
+import { BASE_URL} from "@/config/fetchConfig";
 
 export default function ButtonRegisterTask() {
     const [mostrarModal, setVisiModal] = useState(false);
@@ -20,7 +20,7 @@ export default function ButtonRegisterTask() {
     const registrarTask = async() => {
         const response = await fetch(`${BASE_URL}/tarefas/register`, {
             method: "POST",
-            headers: getHeadersJsonANDToken(),
+            credentials: "include",
             body: JSON.stringify({nomeTask, descricao})
         })
         const data = await response.text()
@@ -41,7 +41,7 @@ export default function ButtonRegisterTask() {
                 <div className="modal">
                 <h2>Registrar Tarefa</h2>
                 <form className="form-new-task">
-                  <input type="text" placeholder="Nome da Tarefa" value={nomeTask} onChange={(e) => (setNomeTask(e.target.value))} />
+                  <input type="text" className="nome-task" placeholder="Nome da Tarefa" value={nomeTask} onChange={(e) => (setNomeTask(e.target.value))} />
                   <textarea placeholder="Descrição da Tarefa" value={descricao} onChange={(e) => (setDescricao(e.target.value))}/>
                   <button type="submit" className="salvar-btn" onClick={() => (registrarTask())}>Salvar</button>
                   <button className="fechar-btn" type="button" onClick={() => mostrarPainel()}>Fechar</button>

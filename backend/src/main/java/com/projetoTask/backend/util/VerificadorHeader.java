@@ -1,15 +1,16 @@
 package com.projetoTask.backend.util;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.http.ResponseEntity;
 
 public class VerificadorHeader {
-    public static String verificarHeader(HttpServletRequest request) {
-        String authHeader = request.getHeader("Authorization");
-
-        if(authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return null;
+    public static String getTokenFromCookie(HttpServletRequest request) {
+        System.out.println(request.getCookies());
+        if(request.getCookies() != null) {
+            for(Cookie cookie : request.getCookies()) {
+                System.out.println("Cookie recebido: " + cookie.getName());
+            }
         }
-        return authHeader.replace("Bearer ", "");
+        return null;
     }
 }
