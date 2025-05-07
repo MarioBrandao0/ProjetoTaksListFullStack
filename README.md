@@ -12,7 +12,7 @@ Antes de iniciar, certifique-se de que você possui os seguintes requisitos inst
 - Node.js
 - NPM
 - MySQL
-- Java (versão compatível com Spring Boot)
+- Java 17 (verifique se você esta realmente usando esta versão se não pode dar erro)
 
 ## Configuração Inicial
 
