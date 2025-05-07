@@ -97,9 +97,16 @@ export default function UsersTasks() {
                                         <span className="status">
                                             {task.status ? '✅ Concluída' : '🕓 Pendente'}
                                         </span>
-                                        <div className="button-concluir">
-                                            <button className="concluir-btn" onClick={() => updateTask(task.id)}>Concluir</button>
-                                        </div>
+                                        {task.status ? (
+                                            <div className="button-desmarcar">
+                                                <button className="desmarcar-btn" onClick={() => updateTask(task.id)}>Desmarcar</button>
+                                            </div>
+                                        ): (
+                                            <div className="button-concluir">
+                                                <button className="concluir-btn" onClick={() => updateTask(task.id)}>Concluir</button>
+                                            </div>
+                                        )}
+                                        
                                     </div>
                                 )}
 

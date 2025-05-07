@@ -48,7 +48,7 @@ public class ServiceTask {
         if(task.isEmpty()) {
            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tarefa não encontrada");
         }
-        taskRepository.updateStatus(id);
+        taskRepository.updateStatus(id, !task.get().isStatus());
 
         return ResponseEntity.ok("");
     }
